@@ -1,0 +1,328 @@
+/* UTILS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+    color: #94a3b8;
+    background-color: #3B3A64;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: Roboto, sans-serif;
+}
+
+h2 {
+    font-size: 0.90rem;
+    font-weight: 400;
+}
+
+button {
+    outline: none;
+    border: none;
+    background: transparent;
+    white-space: nowrap;
+}
+
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 132deg;
+    inherits: false;
+}
+
+@keyframes rotation {
+    0% {
+        --gradient-angle: 0deg;
+    }
+
+    100% {
+        --gradient-angle: 360deg;
+    }
+}
+
+.btn {
+    position: relative;
+    border-radius: 25px;
+    color: #fff;
+    cursor: pointer;
+    isolation: isolate;
+    display: flex;
+    transition: transform 0.3s ease
+}
+
+.btn::after,
+.btn::before {
+    content: "";
+    position: absolute;
+    display: block;
+    z-index: -1;
+    inset: -2px;
+    background: linear-gradient(var(--gradient-angle), #f2be5e, #be2dd1);
+    border-radius: inherit;
+    animation: rotation 10s linear infinite;
+}
+
+.btn::after {
+    filter: blur(.5em);
+    transition: filter 0.3s ease
+}
+
+.btn:hover::after {
+    filter: blur(.75rem)
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+}
+
+.btn span {
+    border-radius: inherit;
+    padding: .75em 1em;
+    background: #1A1936;
+    transition: background 0.3s ease
+}
+
+.btn span:hover {
+    background: transparent;
+}
+
+.description {
+    max-width: 30ch;
+}
+
+.container {
+    background-color: #1A1936;
+}
+
+/* Animated Background */
+
+.blob_container {
+    min-height: 100vh;
+    min-height: 100svh;
+    position: absolute;
+    width: 100%;
+    filter: blur(20px);
+    z-index: -1;
+}
+
+.shape_blob {
+    background: linear-gradient(45deg, #f2be5e, #be2dd1);
+    height: 60px;
+    width: 80px;
+    border-radius: 40% 50% 30% 40%;
+    animation: transform 18s ease-in-out infinite both alternate, movement_one 12s ease-in-out infinite both;
+    opacity: .7;
+    position: absolute;
+    left: 75%;
+    top: 40%;
+}
+
+.shape_blob.one {
+    background: linear-gradient(45deg, #f2be5e, #be2dd1);
+    height: 150px;
+    width: 200px;
+    left: 15%;
+    top: 70%;
+    bottom: 40px;
+    transform: rotate(-180deg);
+    animation: transform 20s ease-in-out infinite both alternate, movement_one 10s ease-in-out infinite both;
+}
+
+.shape_blob.two {
+    background: linear-gradient(45deg, #f2be5e, #be2dd1);
+    height: 120px;
+    width: 120px;
+    left: 10%;
+    top: 10%;
+    bottom: auto;
+    animation: transform 12s ease-in-out infinite both alternate, movement_one 15s ease-in-out infinite both;
+    transform: rotate(-180deg);
+}
+
+.shape_blob.three {
+    position: absolute;
+    background: linear-gradient(45deg, #f2be5e, #be2dd1);
+    height: 120px;
+    width: 120px;
+    top: 50px;
+    left: 65%;
+    transform: rotate(-180deg);
+    animation: transform 12s ease-in-out infinite both alternate, movement_one 20s ease-in-out infinite both;
+}
+
+.shape_blob.four {
+    positon: absolute;
+    background: linear-gradient(45deg, #f2be5e, #be2dd1);
+    height: 60px;
+    width: 100px;
+    left: 85%;
+    top: 85%;
+    transform: rotate(-180deg);
+    animation: transform 10s ease-in-out infinite both alternate, movement_one 16s ease-in-out infinite both;
+}
+
+@keyframes movement_two {
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    50% {
+        transform: translate(50%, 20%) rotateY(100deg) scale(1)
+    }
+}
+
+@keyframes movement_one {
+    50% {
+        transform: translate(70%, 20%) rotate(-200deg) scale(1.3)
+    }
+}
+
+@keyframes transform {
+
+    0%,
+    100% {
+        border-radius: 33% 67% 70% 30% / 30% 40% 70% 70%;
+    }
+
+    20% {
+        border-radius: 37% 63% 51% 49% / 37% 35% 35% 63%;
+    }
+
+    40% {
+        border-radius: 36% 64% 64% 36% / 64% 48% 52% 26%;
+    }
+
+    60% {
+        border-radius: 37% 63% 51% 49% / 30% 30% 70% 73%;
+    }
+
+    80% {
+        border-radius: 40% 60% 42% 58% / 51% 51% 49% 59%;
+    }
+}
+
+/* MAIN CSS */
+.header {
+    text-align: center;
+    font-size: inherit;
+    font-weight: inherit;
+    padding: 2em 0;
+    border-bottom: 2px #0E0D1B50 solid;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.payment_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-rows: auto;
+}
+
+.payment_container>div:not(:nth-last-child(1)) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5em;
+    text-align: center;
+    align-items: center;
+    border-right: 2px #0E0D1B50 solid;
+}
+
+.payment_container>div:not(:nth-last-child(1))>div {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.payment_container>div:not(:nth-last-child(1)) div div p {
+    font-size: 1rem;
+    color: #475569;
+}
+
+.payment_container>div:not(:nth-last-child(1)) div ul {
+    list-style: '>';
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
+.payment_container>div:not(:nth-last-child(1)) div ul li::before {
+    content: '';
+    margin-left: 8px;
+}
+
+.payment_container>div:not(:nth-last-child(1))>div>div {
+    display: inherit;
+    flex-direction: inherit;
+    gap: 8px;
+    margin-bottom: 1rem;
+}
+
+.payment_container>div:not(:nth-last-child(1)) h3 {
+    font-weight: 400;
+    font-size: 2rem;
+}
+
+.payment_container>div:not(:nth-last-child(1)) button {
+    margin-bottom: 5px;
+}
+
+.payment_container>div:nth-last-child(1) {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.payment_container>div:nth-last-child(1)>div:not(:nth-last-child(1)) {
+    border-bottom: 2px #0E0D1B50 solid;
+}
+
+.payment_container>div:nth-last-child(1)>div {
+    white-space: nowrap;
+    padding-inline: 2em;
+    padding-block: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    gap: 5rem;
+}
+
+.payment_container>div:nth-last-child(1) div>div {
+    display: flex;
+    padding: 0;
+    float: right;
+    gap: 1.5rem;
+}
+
+.payment_container>div:nth-last-child(1) div h2 {
+    flex: 1;
+    font-size: 0.90rem;
+}
+
+.payment_container>div:nth-last-child(1) div div div {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+}
+
+.payment_container>div:nth-last-child(1) div div div h3 {
+    font-size: 1.75rem;
+    font-weight: 400;
+}
+
+.payment_container>div:nth-last-child(1) div div div span {
+    font-size: 1rem;
+    color: #475569;
+}
